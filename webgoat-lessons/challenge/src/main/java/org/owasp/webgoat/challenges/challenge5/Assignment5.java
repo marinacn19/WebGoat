@@ -50,6 +50,9 @@ public class Assignment5 extends AssignmentEndpoint {
     @PostMapping("/challenge/5")
     @ResponseBody
     public AttackResult login(@RequestParam String username_login, @RequestParam String password_login) throws Exception {
+        statement.setString(1, username_login); 
+        statement.setString(2, password_login);
+        
         if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
             return failed(this).feedback("required4").build();
         }
@@ -60,8 +63,7 @@ public class Assignment5 extends AssignmentEndpoint {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM challenge_users WHERE userid = ? AND password = ?");
             ResultSet resultSet = statement.executeQuery();
 
-            statement.setString(1, username_login); 
-            statement.setString(2, password_login);
+            
             if (resultSet.next()) {
                 return success(this).feedback("challenge.solved").feedbackArgs(Flag.FLAGS.get(5)).build();
             } else {
