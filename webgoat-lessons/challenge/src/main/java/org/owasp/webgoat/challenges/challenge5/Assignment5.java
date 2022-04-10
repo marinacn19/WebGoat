@@ -69,8 +69,11 @@ public class Assignment5 extends AssignmentEndpoint {
     @PostMapping("/challenge/5")
     @ResponseBody
     public AttackResult login(javax.servlet.http.HttpServletRequest request, java.sql.Connection connection) throws SQLException {
-        String username_login = request.getParameter("user");
-        String password_login = request.getParameter("pass");
+        String username_login = request.getParameter("userid");
+        String password_login = request.getParameter("password");
+
+    
+        
 
         if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
             return failed(this).feedback("required4").build();
@@ -81,6 +84,9 @@ public class Assignment5 extends AssignmentEndpoint {
         try (var connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select password from challenge_users where userid = '" + username_login + "' and password = '" + password_login + "'");
             ResultSet resultSet = statement.executeQuery();
+
+            statement.setString(1, username_login); // Will be properly escaped
+            statement.setString(2, password_login);
 
             if (resultSet.next()) {
                 return success(this).feedback("challenge.solved").feedbackArgs(Flag.FLAGS.get(5)).build();
