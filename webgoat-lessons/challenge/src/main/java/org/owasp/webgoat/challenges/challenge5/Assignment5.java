@@ -47,8 +47,9 @@ public class Assignment5 extends AssignmentEndpoint {
         this.dataSource = dataSource;
     }
 
-    
-    /*public AttackResult login(@RequestParam String username_login, @RequestParam String password_login) throws Exception {
+    @PostMapping("/challenge/5")
+    @ResponseBody
+    public AttackResult login(@RequestParam String username_login, @RequestParam String password_login) throws Exception {
         if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
             return failed(this).feedback("required4").build();
         }
@@ -65,16 +66,13 @@ public class Assignment5 extends AssignmentEndpoint {
                 return failed(this).feedback("challenge.close").build();
             }
         }
-    }*/
-    @PostMapping("/challenge/5")
-    @ResponseBody
+    }
+    /*
     public AttackResult login(javax.servlet.http.HttpServletRequest request, java.sql.Connection connection) throws Exception {
         String username_login = request.getParameter("userid");
         String password_login = request.getParameter("password");
 
     
-        
-
         if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
             return failed(this).feedback("required4").build();
         }
@@ -94,6 +92,6 @@ public class Assignment5 extends AssignmentEndpoint {
                 return failed(this).feedback("challenge.close").build();
             }
         }
-    }
+    }*/
 }
 
