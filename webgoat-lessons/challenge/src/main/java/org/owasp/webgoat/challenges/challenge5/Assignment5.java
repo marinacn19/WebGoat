@@ -47,8 +47,7 @@ public class Assignment5 extends AssignmentEndpoint {
         this.dataSource = dataSource;
     }
 
-    @PostMapping("/challenge/5")
-    @ResponseBody
+    
     /*public AttackResult login(@RequestParam String username_login, @RequestParam String password_login) throws Exception {
         if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
             return failed(this).feedback("required4").build();
@@ -67,7 +66,8 @@ public class Assignment5 extends AssignmentEndpoint {
             }
         }
     }*/
-
+    @PostMapping("/challenge/5")
+    @ResponseBody
     public AttackResult login(javax.servlet.http.HttpServletRequest request, java.sql.Connection connection) throws SQLException {
         String username_login = request.getParameter("userid");
         String password_login = request.getParameter("password");
