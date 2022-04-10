@@ -167,8 +167,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
             return failed(this).feedback("jwt-invalid-token").build();
         } else {
             try {
-                Jwt jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parse(accessToken);
-                Claims claims = (Claims) jwt.getBody();
+                Claims claims = Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(accessToken).getBody();
                 boolean isAdmin = Boolean.valueOf((String) claims.get("admin"));
                 if (!isAdmin) {
                     return failed(this).feedback("jwt-only-admin").build();
