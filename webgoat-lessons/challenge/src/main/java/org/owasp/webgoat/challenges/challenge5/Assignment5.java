@@ -60,6 +60,8 @@ public class Assignment5 extends AssignmentEndpoint {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM challenge_users WHERE userid = ? AND password = ?");
             ResultSet resultSet = statement.executeQuery();
 
+            statement.setString(1, username_login); 
+            statement.setString(2, password_login);
             if (resultSet.next()) {
                 return success(this).feedback("challenge.solved").feedbackArgs(Flag.FLAGS.get(5)).build();
             } else {
