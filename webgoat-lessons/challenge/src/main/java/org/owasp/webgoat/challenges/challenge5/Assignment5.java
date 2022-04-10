@@ -68,7 +68,7 @@ public class Assignment5 extends AssignmentEndpoint {
     }*/
     @PostMapping("/challenge/5")
     @ResponseBody
-    public AttackResult login(javax.servlet.http.HttpServletRequest request, java.sql.Connection connection) throws SQLException {
+    public AttackResult login(javax.servlet.http.HttpServletRequest request, java.sql.Connection connection) throws Exception {
         String username_login = request.getParameter("userid");
         String password_login = request.getParameter("password");
 
