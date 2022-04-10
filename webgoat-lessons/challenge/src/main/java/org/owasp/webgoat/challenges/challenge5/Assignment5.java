@@ -69,8 +69,8 @@ public class Assignment5 extends AssignmentEndpoint {
     @PostMapping("/challenge/5")
     @ResponseBody
     public AttackResult login(javax.servlet.http.HttpServletRequest request, java.sql.Connection connection) throws SQLException {
-        String username_login = request.getParameter("userid");
-        String password_login = request.getParameter("password");
+        String username_login = request.getParameter("user");
+        String password_login = request.getParameter("pass");
 
         if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
             return failed(this).feedback("required4").build();
