@@ -24,7 +24,6 @@ package org.owasp.webgoat.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -126,8 +125,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
         String user;
         String refreshToken;
         try {
-            Jwt<Header, Claims> jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parse(token.replace("Bearer ", ""));
-            user = (String) jwt.getBody().get("user");
+            user = (String) Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(token.replace("Bearer ", "")).getBody().get("user");
             refreshToken = (String) json.get("refresh_token");
         } catch (ExpiredJwtException e) {
             user = (String) e.getClaims().get("user");
