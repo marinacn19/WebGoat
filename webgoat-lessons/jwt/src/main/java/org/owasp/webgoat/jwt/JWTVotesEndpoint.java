@@ -122,8 +122,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
             value.setSerializationView(Views.GuestView.class);
         } else {
             try {
-                Jwt jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parse(accessToken);
-                Claims claims = (Claims) jwt.getBody();
+                Claims claims = Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(accessToken).getBody();
                 String user = (String) claims.get("user");
                 if ("Guest".equals(user) || !validUsers.contains(user)) {
                     value.setSerializationView(Views.GuestView.class);
@@ -145,8 +144,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } else {
             try {
-                Jwt jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parse(accessToken);
-                Claims claims = (Claims) jwt.getBody();
+                Claims claims = Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(accessToken).getBody();
                 String user = (String) claims.get("user");
                 if (!validUsers.contains(user)) {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
