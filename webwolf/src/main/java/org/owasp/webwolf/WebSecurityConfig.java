@@ -22,6 +22,7 @@
  */
 package org.owasp.webwolf;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import lombok.AllArgsConstructor;
 import org.owasp.webwolf.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService); //.passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        
     }
 
     @Bean
